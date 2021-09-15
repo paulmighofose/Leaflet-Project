@@ -1,0 +1,31 @@
+---
+title: "Leaflet Project"
+author: "Paul Ighofose"
+date: "9/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Colleges:
+
+This R Markdown presentation displays the locations of 8 colleges and universities located within the state of Connecticut. Each college is labeled and provided with an address.
+
+```{r,echo=FALSE}
+library(leaflet)
+
+school <- data.frame(College = c("Trinity College","University of Hartford","University of Saint Joseph","Capital College", "Central Connecticut State College", "Goodwin University","Wesleyan University","University of Connecticut"))
+
+address <- data.frame(Address = c("300 Summit Street Hrtford CT 06106", "200 Bloomfield Avenue West Hartford CT 06117", "1678 Asylum Avenue West Hartford Connecticut 06117", "950 Main Street Hartford CT 06103 ", "1615 Stanley Street New Britain CT 06050", "1 Riverside Drive East Hartford CT 06118 ", "70 Wyllys Avenue Middletown CT 06459", "233 Glenbrook Road Unit 4077 Storrs CT06269"))
+
+lat <- data.frame(Lat = c(41.74525, 41.79381, 41.78253, 41.76831, 41.69265, 41.74144, 41.55729, 41.80935))
+long <- data.frame(long = c(-72.69168, -72.71652, -72.73131, -72.67262, -72.770590, -72.63785, -72.65647, -72.25357))
+
+data <- cbind(school,address,lat,long)
+
+Data <- data %>% leaflet() %>% addTiles() %>% addMarkers(popup = data$Address,label = data$College)
+Data
+
+```
